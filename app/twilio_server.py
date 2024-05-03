@@ -19,7 +19,7 @@ class TwilioClient:
                 raise "No phone numbers of this area code."
             phone_number_object = self.client.incoming_phone_numbers.create(
                 phone_number=local_number[0].phone_number,
-                voice_url=f"{os.getenv('NGROK_IP_ADDRESS')}/twilio-voice-webhook/{agent_id}",
+                voice_url=f"{os.getenv('BACKEND_IP_ADDRESS')}/twilio-voice-webhook/{agent_id}",
             )
             print("Getting phone number:", vars(phone_number_object))
             return phone_number_object
@@ -40,7 +40,7 @@ class TwilioClient:
                 )
                 return
             phone_number_object = self.client.incoming_phone_numbers(number_sid).update(
-                voice_url=f"{os.getenv('NGROK_IP_ADDRESS')}/twilio-voice-webhook/{agent_id}"
+                voice_url=f"{os.getenv('BACKEND_IP_ADDRESS')}/twilio-voice-webhook/{agent_id}"
             )
             print("Register phone agent:", vars(phone_number_object))
             return phone_number_object
@@ -95,8 +95,8 @@ class TwilioClient:
                 machine_detection="Enable",  # detects if the other party is IVR
                 machine_detection_timeout=8,
                 async_amd="true",  # call webhook when determined whether it is machine
-                async_amd_status_callback=f"{os.getenv('NGROK_IP_ADDRESS')}/twilio-voice-webhook/{agent_id}",  # Webhook url for machine detection
-                url=f"{os.getenv('NGROK_IP_ADDRESS')}/twilio-voice-webhook/{agent_id}",
+                async_amd_status_callback=f"{os.getenv('BACKEND_IP_ADDRESS')}/twilio-voice-webhook/{agent_id}",  # Webhook url for machine detection
+                url=f"{os.getenv('BACKEND_IP_ADDRESS')}/twilio-voice-webhook/{agent_id}",
                 to=to_number,
                 from_=from_number,
             )

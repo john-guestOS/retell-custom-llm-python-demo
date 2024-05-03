@@ -1,21 +1,21 @@
 import json
 import os
 import asyncio
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import JSONResponse, PlainTextResponse
 from concurrent.futures import TimeoutError as ConnectionTimeoutError
 from twilio.twiml.voice_response import VoiceResponse
 from retell import Retell
 from retell.resources.call import RegisterCallResponse
-from .custom_types import (
+from custom_types import (
     ConfigResponse,
     ResponseRequiredRequest,
 )
-from .twilio_server import TwilioClient
-from .llm import LlmClient  # or use .llm_with_func_calling
+from twilio_server import TwilioClient
+from llm import LlmClient  # or use .llm_with_func_calling
 
-load_dotenv(override=True)
+# load_dotenv(override=True)
 app = FastAPI()
 retell = Retell(api_key=os.environ["RETELL_API_KEY"])
 
