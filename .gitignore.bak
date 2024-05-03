@@ -159,5 +159,5 @@ cython_debug/
 #.idea/
 
 .env_internal
-
+.env
 .env2
